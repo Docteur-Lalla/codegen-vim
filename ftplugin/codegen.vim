@@ -38,7 +38,8 @@ function! CodeGenSplit(lang)
   let @a = code
 
   " Split the window and copy the code in the newly created buffer
-  split
+  let filename = expand('%:r') . "." . a:lang
+  split filename
   execute('normal! "aP')
 
   " Reset the register a and set filetype
