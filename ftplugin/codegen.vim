@@ -9,7 +9,6 @@ function! CodeGenBuffer(lang)
   let code = system(g:codegen_exec . " " . a:lang . " '" . conf . "'")
   normal! gg_dG
   let @a = code
-  execute('normal! "ap')
-  " execute "normal! i" . code . "<esc>gg"
+  execute('normal! "aP')
   let @a = save_a_reg
 endfunction
