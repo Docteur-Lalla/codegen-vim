@@ -11,5 +11,5 @@ function! CodeGenBuffer(lang)
   let @a = code
   execute('normal! "aP')
   let @a = save_a_reg
-  set filetype = a:lang
+  let &filetype = a:lang
 endfunction
