@@ -5,7 +5,8 @@ endif
 function! CodeGenBuffer(lang)
   let save_a_reg = @a
   execute 'normal! gg"ayG'
-  let code = system(g:codegen_exec . " " . a:lang . " '" . @a . "'")
+  let conf = @a
+  let code = system(g:codegen_exec . " " . a:lang . " '" . conf . "'")
   normal! gg_dG
   set @a = code
   execute 'normal! "ap'
