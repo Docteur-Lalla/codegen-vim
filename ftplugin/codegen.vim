@@ -8,8 +8,8 @@ function! CodeGenBuffer(lang)
   let conf = @a
   let code = system(g:codegen_exec . " " . a:lang . " '" . conf . "'")
   normal! gg_dG
-  set @a = code
+  let @a = code
   execute('normal! "ap')
   " execute "normal! i" . code . "<esc>gg"
-  set @a = save_a_reg
+  let @a = save_a_reg
 endfunction
