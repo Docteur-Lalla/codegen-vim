@@ -48,11 +48,11 @@ function! CodeGenSplit(lang, splitf)
 endfunction
 
 function! CodeGenHSplit(lang)
-  CodeGenSplit(a:lang, "split")
+  call CodeGenSplit(a:lang, "split")
 endfunction
 
 function! CodeGenVSplit(lang)
-  CodeGenSplit(a:lang, "vsplit")
+  call CodeGenSplit(a:lang, "vsplit")
 endfunction
 
 function! CodeGenLine()
