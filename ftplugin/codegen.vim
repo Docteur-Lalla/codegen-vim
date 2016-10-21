@@ -25,7 +25,7 @@ function! CodeGenBuffer(lang)
   let &filetype = a:lang
 endfunction
 
-function! CodeGenSplit(lang)
+function! CodeGenSplit(lang, splitf)
   " Save the state of register a
   let save_a_reg = @a
 
@@ -39,10 +39,38 @@ function! CodeGenSplit(lang)
 
   " Split the window and copy the code in the newly created buffer
   let filename = expand('%:r') . "." . a:lang
-  execute("split " . filename)
+  execute(a:splitf . " " . filename)
   execute('normal! "aP')
 
   " Reset the register a and set filetype
   let @a = save_a_reg
   let &filetype = a:lang
+endfunction
+
+function! CodeGenHSplit(lang)
+  CodeGenSplit(a:lang, "split")
+endfunction
+
+function! CodeGenVSplit(lang)
+  CodeGenSplit(a:lang, "vsplit")
+endfunction
+
+function! CodeGenLine()
+  " Set the target language and save the register a
+  let lang = &filetype
+  let save_a_reg = @a
+  
+  " Copy the line
+  execute('normal! "ayy')
+  let conf = @a
+
+  " Generate the code
+  let code = system(g:codegen_exec . " " . lang . " '" . conf . "'")
+  let @a = code
+
+  " Copy the code in the buffer
+  execute('normal! _dd"aP')
+
+  " Restore the register a
+  let @a = save_a_reg
 endfunction
